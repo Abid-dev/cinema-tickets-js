@@ -34,11 +34,20 @@ html {
 
 label, input, select, textarea{
     display: block;
-    padding: 5px;
+    padding: 12px;
+    margin-bottom: 4px;
 }
 
 label {
     font-size: 1.5em;
+}
+
+input {
+    height: 20px;
+    margin: 10px auto;
+    width: 50%;
+    font-size: 1.2em;
+    border-radius: 5px;
 }
 
 
