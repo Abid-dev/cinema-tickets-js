@@ -1,3 +1,5 @@
+
+
 setInterval(function() {
    let welcomeMessage = document.getElementById('welcome-section');
    let inputSection = document.getElementById('input-section');
