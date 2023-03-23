@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import engines from 'consolidate';
 import ejs from 'ejs';
 
 const app = express();
