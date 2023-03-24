@@ -23,8 +23,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/submit', (req, res) => {
-  const adultTickets = req.body.adultTickets;
-  const message = `You wanted, ${adultTickets} tickets!`;
+  const adultTickets = +req.body.adultTickets;
+  const childTickets = +req.body.childTickets;
+  const infantTickets = +req.body.infantTickets;
+  let totalTickets = adultTickets + childTickets + infantTickets;
+  const message = `You wanted, ${totalTickets} tickets!`;
 
   res.redirect('/?message=' + encodeURIComponent(message));
   // res.send(message);
