@@ -9,8 +9,21 @@ export default class TicketService {
 
   purchaseTickets(accountId, ...ticketTypeRequests) {
     // throws InvalidPurchaseException
+    this.#checkAccountId(accountId);
     this.#checkNumberOfTicketsWithinMax(ticketTypeRequests);
     return `Yay! You have got tickets!`;
+  }
+
+  #checkAccountId(accountId) {
+    if(!accountId) {
+      throw new InvalidPurchaseException("An Account ID is required")
+    }
+
+    if(accountId <= 0) {
+      throw new InvalidPurchaseException("Account ID must be greater than zero")
+    }
+
+    return true;
   }
 
   #checkNumberOfTicketsWithinMax(ticketTypeRequests) {
