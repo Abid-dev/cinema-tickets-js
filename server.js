@@ -13,16 +13,21 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.render("index");
+  if (req.query.message) {
+    const message = req.query.message;
+    res.render('index', { message: message });
+    return;
+  }
+
+  res.render("index");
 });
 
 app.post('/submit', (req, res) => {
   const adultTickets = req.body.adultTickets;
-  console.log(adultTickets);
-  const message = `Hello, ${adultTickets}!`;
+  const message = `You wanted, ${adultTickets} tickets!`;
 
-  res.send(message);
-
+  res.redirect('/?message=' + encodeURIComponent(message));
+  // res.send(message);
 });
 
 app.listen(3000, () => {
