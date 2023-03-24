@@ -1,9 +1,13 @@
 import TicketTypeRequest from "./lib/TicketTypeRequest.js";
 import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
+import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService.js";
 import {
   MAX_TICKETS_PER_PURCHASE,
+  TICKET_PRICE_ADULT,
+  TICKET_PRICE_CHILD,
   TICKET_TYPE_ADULT,
+  TICKET_TYPE_CHILD,
   TICKET_TYPE_INFANT,
 } from "../../config/constants.js";
 
@@ -15,13 +19,17 @@ export default class TicketService {
   purchaseTickets(accountId, ...ticketTypeRequests) {
     // throws InvalidPurchaseException
     this.#checkAccountId(accountId);
-    this.#checkNumberOfTicketsWithinMax(ticketTypeRequests);
+    const totalTickets =
+      this.#checkNumberOfTicketsWithinMax(ticketTypeRequests);
     this.#checkForAdultTickets(ticketTypeRequests);
+
+    const totalCost = this.#getTotalCost(ticketTypeRequests);
+    new TicketPaymentService().makePayment(accountId, totalCost);
 
     const totalSeats = this.#getTotalSeats(ticketTypeRequests);
     new SeatReservationService().reserveSeat(accountId, totalSeats);
 
-    return `You have got tickets with ${totalSeats} booked!`;
+    return `Your payment of £${totalCost} was successfully. You have got ${totalTickets} tickets with ${totalSeats} seats booked!`;
   }
 
   #checkAccountId(accountId) {
@@ -47,7 +55,7 @@ export default class TicketService {
         `Number of tickets exceeded the maximum ${MAX_TICKETS_PER_PURCHASE}`
       );
     }
-    return true;
+    return totalTickets;
   }
 
   #checkForAdultTickets(ticketTypeRequests) {
@@ -59,15 +67,28 @@ export default class TicketService {
     }, 0);
 
     if (adultTickets < 1) {
-      throw new InvalidPurchaseException("There must be at least one adult to accompany the children")
+      throw new InvalidPurchaseException(
+        "There must be at least one adult to accompany the children"
+      );
     }
     return true;
   }
 
   #getTotalSeats(ticketTypeRequests) {
     return ticketTypeRequests.reduce((sum, type) => {
-      if(type.getTicketType() !== TICKET_TYPE_INFANT) {
+      if (type.getTicketType() !== TICKET_TYPE_INFANT) {
         return sum + type.getNoOfTickets();
+      }
+      return sum;
+    }, 0);
+  }
+
+  #getTotalCost(ticketTypeRequests) {
+    return ticketTypeRequests.reduce((sum, type) => {
+      if (type.getTicketType() === TICKET_TYPE_ADULT) {
+        return sum + TICKET_PRICE_ADULT * type.getNoOfTickets();
+      } else if (type.getTicketType() === TICKET_TYPE_CHILD) {
+        return sum + TICKET_PRICE_CHILD * type.getNoOfTickets();
       }
       return sum;
     }, 0);
