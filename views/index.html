@@ -11,19 +11,24 @@
     <div class="container">
 
         <%if (typeof message !== 'undefined') { %>
-            <div class="section-wrapper" id="">
-                <h1>Your message!</h1>
+            <div class="section-wrapper">
+                <h1>Yayy!</h1>
                 <h2><%= message  %></h2>
             </div>
         <% } else {%>
-            <div class="section-wrapper" id="welcome-section">
-                <h1>Hello, Welcome!</h1>
-                <h2>Let's get you some booked tickets 🙂</h2>
-            </div>
+            <%if (typeof error !== 'undefined') { %>
+                <div class="section-wrapper" id="error-section">
+                    <h1>Oopsi</h1>
+                    <h3><%= error %></h3>
+                </div>
+            <% } %>
     
             <div class="section-wrapper" id="input-section">
                 <h1>Input Section</h1>
-                <form action="/submit" method="POST">
+                <form action="/submit" method="POST">  
+                    <label for="adult-tickets">What is your account ID number?</label>
+                    <input type="number" name="accountId" id="accountId" placeholder="Account ID Number">
+
                     <label for="adult-tickets">How how many tickets would you like to get?</label>
                     <input type="number" name="adultTickets" id="adult-tickets" placeholder="Adult Tickets">
                     <input type="number" name="childTickets" id="child-tickets" placeholder="Child Tickets">

@@ -27,8 +27,8 @@ html {
     align-items: center;
 }
 
-#input-section {
-    display: none;
+#error-section {
+    margin: 20px auto 0 auto;
 }
 
 label, input, select, textarea{
