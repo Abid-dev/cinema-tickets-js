@@ -1,8 +1,10 @@
 import TicketTypeRequest from "./lib/TicketTypeRequest.js";
 import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
+import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
 import {
   MAX_TICKETS_PER_PURCHASE,
   TICKET_TYPE_ADULT,
+  TICKET_TYPE_INFANT,
 } from "../../config/constants.js";
 
 export default class TicketService {
@@ -15,7 +17,11 @@ export default class TicketService {
     this.#checkAccountId(accountId);
     this.#checkNumberOfTicketsWithinMax(ticketTypeRequests);
     this.#checkForAdultTickets(ticketTypeRequests);
-    return `Yay! You have got tickets!`;
+
+    const totalSeats = this.#getTotalSeats(ticketTypeRequests);
+    new SeatReservationService().reserveSeat(accountId, totalSeats);
+
+    return `You have got tickets with ${totalSeats} booked!`;
   }
 
   #checkAccountId(accountId) {
@@ -56,5 +62,14 @@ export default class TicketService {
       throw new InvalidPurchaseException("There must be at least one adult to accompany the children")
     }
     return true;
+  }
+
+  #getTotalSeats(ticketTypeRequests) {
+    return ticketTypeRequests.reduce((sum, type) => {
+      if(type.getTicketType() !== TICKET_TYPE_INFANT) {
+        return sum + type.getNoOfTickets();
+      }
+      return sum;
+    }, 0);
   }
 }
