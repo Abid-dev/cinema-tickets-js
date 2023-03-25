@@ -5,13 +5,6 @@ This was a javascript assessment project assigned by DWP. I was tasked to make w
 
 - [Task Rules](#task-rules)
 - [Installation](#installation)
-- [Technologies and Languages](#technologies-and-languages)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [License](#license)
-- [Screenshots](#screenshots)
-- [GitHub repository](#github-repository)
-- [Questions](#questions)
 
 ## Task Rules
 
