@@ -85,6 +85,6 @@ node app.js
 You should be able to view and play around with it on your localhost port 3000.
 
 
-## Screenshots
+## Screenshot
 
 ![Homepage](public/images/screenshot.png)
