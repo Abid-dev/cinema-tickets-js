@@ -3,7 +3,6 @@ import path from "path";
 import ejs from "ejs";
 import TicketService from "./src/pairtest/TicketService.js";
 import TicketTypeRequest from "./src/pairtest/lib/TicketTypeRequest.js";
-// import constants from './config/constants';TODO maybe i can use this instead of all constants separately
 import {
   TICKET_TYPE_ADULT,
   TICKET_TYPE_INFANT,
