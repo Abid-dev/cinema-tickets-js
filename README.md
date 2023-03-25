@@ -1,17 +1,19 @@
 # cinema-tickets-js
-Instructions:
+This was a javascript assessment project assigned by DWP. I was tasked to make working cinema ticket service. 
 
-# Objective
+## Contents
 
-This is a coding exercise which will allow you to demonstrate how you code and your approach to a given problem.
+- [Task Rules](#task-rules)
+- [Installation](#installation)
+- [Technologies and Languages](#technologies-and-languages)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [License](#license)
+- [Screenshots](#screenshots)
+- [GitHub repository](#github-repository)
+- [Questions](#questions)
 
-You will be assessed on:
-
-- Your ability to write clean, well-tested and reusable code.
-
-- How you have ensured the following business rules are correctly met.
-
-# Business Rules
+## Task Rules
 
 - There are 3 types of tickets i.e. Infant, Child, and Adult.
 
@@ -41,7 +43,7 @@ You will be assessed on:
 
 - There is an existing `SeatReservationService` responsible for reserving seats.
 
-## Constraints
+### Constraints
 
 - The TicketService interface CANNOT be modified. (For Java solution only)
 
@@ -49,7 +51,7 @@ You will be assessed on:
 
 - The `TicketTypeRequest` SHOULD be an immutable object.
 
-## Assumptions
+### Assumptions
 
 You can assume:
 
@@ -63,7 +65,7 @@ You can assume:
 
 - The seat will always be reserved once a reservation request has been made to the `SeatReservationService`.
 
-## Your Task
+### Your Task
 
 Provide a working implementation of a `TicketService` that:
 
@@ -75,3 +77,19 @@ Provide a working implementation of a `TicketService` that:
 
 - Rejects any invalid ticket purchase requests. It is up to you to identify what should be deemed as an invalid purchase request.”
 
+
+## Installation
+
+```bash
+git clone https://github.com/Abid-dev/cinema-tickets-js.git
+cd cinema-tickets-js
+npm install
+```
+
+To run the program locally on your browser, run the following command:
+
+```bash
+node app.js
+```
+
+You should be able to view and play around with it on your localhost port 3000.
