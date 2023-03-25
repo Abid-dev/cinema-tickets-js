@@ -5,6 +5,7 @@ This was a javascript assessment project assigned by DWP. I was tasked to make w
 
 - [Task Rules](#task-rules)
 - [Installation](#installation)
+- [Screenshot](#screenshot)
 
 ## Task Rules
 
@@ -23,13 +24,9 @@ This was a javascript assessment project assigned by DWP. I was tasked to make w
 - Child and Infant tickets cannot be purchased without purchasing an Adult ticket.
 
 |   Ticket Type    |     Price   |
-
 | ---------------- | ----------- |
-
 |    INFANT        |    £0       |
-
 |    CHILD         |    £10      |
-
 |    ADULT         |    £20      |
 
 - There is an existing `TicketPaymentService` responsible for taking payments.
@@ -86,3 +83,8 @@ node app.js
 ```
 
 You should be able to view and play around with it on your localhost port 3000.
+
+
+## Screenshots
+
+![Homepage](public/images/screenshot.png)
